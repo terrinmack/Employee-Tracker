@@ -16,3 +16,45 @@
 // WHEN I choose to update an employee role
 // THEN I am prompted to select an employee to update and their new role and this information is updated in the database 
 
+const mysql = require('mysql2');
+const inquirer = require('inquirer');
+const consoleTable = require('console.table');
+
+const connection = mysql.createConnection({
+    host: 'localhost',
+    port: 3306,
+    user: 'root',
+    password: '',
+    database: 'company_db',
+});
+
+connection.connect(err => {
+    if (err) throw err;
+    console.log('You are connected!');
+    start();
+});
+
+  const start = () => {
+    inquirer.prompt({
+        message: 'What would you like to do?',
+        type: 'list',
+        name: 'menu',
+        choices: [
+            'View All Employees',
+            'Add Employee',
+            'Update Employee Role',
+            'View All Roles',
+            'Add Role',
+            'View All Departments',
+            'Add Department',
+            'Exit',
+        ]
+
+    }).then((answer) => {
+        switch (answer.menu) {
+            case 'View All Employees':
+                viewEmp();
+                break;
+        }
+    })
+  }

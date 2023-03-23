@@ -18,11 +18,11 @@ VALUES
 
 INSERT INTO employee(first_name, last_name, role_id, manager_id)
 VALUES
-    ("John", "Doe", 1, NULL),
-    ("Mike", "Chan", 2, 1),
-    ("Ashley", "Rodriguez", 3, NULL),
-    ("Kevin", "Tupik", 4, 3),
-    ("Kunal, Singh", 5, NULL)
-    ("Malia", "Brown", 6, 5),
-    ("Sarah", "Lourd", 7, NULL),
-    ("Tom", "Allen", 8, 6);
+    ("Yoichi", "Isagi", 1, NULL),
+    ("Meguru", "Bachira", 2, 1),
+    ("Hyoma", "Chigiri", 3, NULL),
+    ("Shoei", "Baro", 4, 3),
+    ("Seishiro, Nagi", 5, NULL)
+    ("Reo", "Mikage", 6, 5),
+    ("Rin", "Itoshi", 7, NULL),
+    ("Rensuke", "Kunigami", 8, 6);
