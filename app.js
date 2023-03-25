@@ -55,6 +55,36 @@ connection.connect(err => {
             case 'View All Employees':
                 viewEmp();
                 break;
+
+            case 'Add Employee':
+                addEmp();
+                break;
+
+            case 'Update Employee Role':
+                updateEmpRole();
+                break;
+
+            case 'View All Roles':
+                viewAllRoles();
+                break;
+
+            case 'Add Role':
+                addRole();
+                break;
+
+            case 'View All Departments':
+                viewAllDep();
+                break;
+
+            case 'Add Department':
+                addDep();
+                break;
+
+            case 'Exit':
+                console.log('Sayonara!')
+                connection.end();
+                break;
         }
-    })
-  }
+    });
+  };
+
