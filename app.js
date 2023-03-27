@@ -3,18 +3,18 @@ const mysql = require("mysql2");
 const inquirer = require("inquirer");
 const consoleTable = require("console.table");
 
-const connection = mysql.createConnection({
+const PORT = process.env.PORT || 3001;
+
+const db = mysql.createConnection({
     host: "localhost",
-    port: 3001,
-    user: "root",
-    // user to input personal mysql password here
-    password: "",
-    database: "company_db",
+    user: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
 });
 
-connection.connect(err => {
+db.connect(err => {
     if (err) throw err;
-    console.log("You are connected!");
+    console.log("You are connected to BlueLock!");
     start();
 });
 
@@ -37,8 +37,6 @@ connection.connect(err => {
             "Add Department",
             "Exit",
         ]
-
-
 
 // switch code for each list item
     }).then((answer) => {
@@ -82,7 +80,7 @@ connection.connect(err => {
 // WHEN I choose to view all employees
 // THEN I am presented with a formatted table showing employee data, including employee ids, first names, last names, job titles, departments, salaries, and managers that the employees report to
 const viewEmp = () => {
-    connection.query("SELECT * FROM employee", (err, data) => {
+    connection.query("SELECT * FROM employee", function (err, data) {
         if (err) throw err;
         console.table(data);
         start();
@@ -92,7 +90,52 @@ const viewEmp = () => {
 // WHEN I choose to add an employee
 // THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
 const addEmp = () => {
-    
+    inquirer.prompt([
+        {
+            name: "firstName",
+            type: "input",
+            message: "What is the employee's first name?",
+        },
+        {
+            name: "lastName",
+            type: "input",
+            message: "What is the employee's last name?",
+        },
+        {
+            name: "employeeRole",
+            type: "list",
+            message: "What isthe employee's role?",
+            choices: [
+                "Sales Lead",
+                "Salesperson",
+                "Lead Engineer",
+                "Software Engineer",
+                "Account Manager",
+                "Accountant",
+                "Legal Team Lead",
+                "Lawyer"
+            ]
+        },
+        {
+            name: "employeeManager",
+            type: "list",
+            message: "Who is the employee's manager?",
+            choices: [
+                "Yoichi Isagi",
+                "Meguru Bachira",
+                "Hyoma Chigiri",
+                "Shoei Baro",
+                "Seishiro Nagi",
+                "Reo Mikage",
+                "Rin Itoshi",
+                "Rensuke Kunigami",
+            ]
+        },
+    ]) .then(answer => {
+        connection.query(
+            "INSERT INTO employee (first_name, last_name, role_id, manager_id"
+        )
+    })
 }
 
 // WHEN I choose to update an employee role
