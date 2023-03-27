@@ -76,6 +76,8 @@ connection.connect(err => {
     });
   };
 
+//   DONE 
+
 // WHEN I choose to view all employees
 // THEN I am presented with a formatted table showing employee data, including employee ids, first names, last names, job titles, departments, salaries, and managers that the employees report to
 const viewEmp = () => {
@@ -145,6 +147,8 @@ const updateEmpRole = () => {
  
 }
 
+// DONE
+
 // WHEN I choose to view all roles
 // THEN I am presented with the job title, role id, the department that role belongs to, and the salary for that role
 const viewAllRoles = () => {
@@ -172,19 +176,21 @@ const addRole = () => {
         },
         {
             name: "roleDep",
-            type: "list",
-            message: "Which department does the role belong to?",
-            choices: [
-                "Forward",
-                "MidFielder",
-                "Defender",
-                "Goalkeeper",
-            ]
+            type: "input",
+            message: "Which department does the role belong to? (input department ID)",
         },
         
     ]) .then(answer => {
+        connection.query("INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)" [answer.roleTitle, answer.roleSalary, answer.roleDep], function (err, data) {
+            if (err) throw err;
+            console.log('New role successfully added!');
+            console.table(data);
+            start();
+        })
     })
 }
+
+// DONE
 
 // WHEN I choose to view all departments
 // THEN I am presented with a formatted table showing department names and department ids
@@ -197,8 +203,21 @@ const viewAllDep = () => {
     }); 
 }
 
+// DONE
+
 // WHEN I choose to add a department
 // THEN I am prompted to enter the name of the department and that department is added to the database
 const addDep = () => {
-    
+    inquirer.prompt({
+        type: "input",
+        name: "deptName",
+        message: "What is the name of the department?"
+    }).then(answer => {
+        connection.query("INSERT INTO departments (name) VALUES (?)", [answer.deptName], function(err, data) {
+            if (err) throw err;
+            console.log("New department added!");
+            console.table(data);
+            start();
+        })
+    })
 }
