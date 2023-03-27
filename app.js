@@ -104,7 +104,7 @@ const addEmp = () => {
         {
             name: "employeeRole",
             type: "list",
-            message: "What isthe employee's role?",
+            message: "What is the employee's role?",
             choices: [
                 "Sales Lead",
                 "Salesperson",
