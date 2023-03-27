@@ -81,6 +81,7 @@ connection.connect(err => {
 const viewEmp = () => {
     connection.query("SELECT * FROM employees", function (err, data) {
         if (err) throw err;
+        console.log('Presenting: All Employees');
         console.table(data);
         start();
     });
@@ -140,25 +141,60 @@ const addEmp = () => {
 // WHEN I choose to update an employee role
 // THEN I am prompted to select an employee to update and their new role and this information is updated in the database 
 const updateEmpRole = () => {
-    
+    // shows employees that can be updated
+ 
 }
 
 // WHEN I choose to view all roles
 // THEN I am presented with the job title, role id, the department that role belongs to, and the salary for that role
 const viewAllRoles = () => {
-    
+    connection.query("SELECT * FROM roles", function (err, data) {
+        if (err) throw err;
+        console.log('Presenting: All Roles');
+        console.table(data);
+        start();
+    }); 
 }
 
 // WHEN I choose to add a role
 // THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database
 const addRole = () => {
-    
+    inquirer.prompt([
+        {
+            name: "roleTitle",
+            type: "input",
+            message: "What is the name of the role?"
+        },
+        {
+            name: "roleSalary",
+            type: "input",
+            message: "What is the salary of the role?"
+        },
+        {
+            name: "roleDep",
+            type: "list",
+            message: "Which department does the role belong to?",
+            choices: [
+                "Forward",
+                "MidFielder",
+                "Defender",
+                "Goalkeeper",
+            ]
+        },
+        
+    ]) .then(answer => {
+    })
 }
 
 // WHEN I choose to view all departments
 // THEN I am presented with a formatted table showing department names and department ids
 const viewAllDep = () => {
-    
+    connection.query("SELECT * FROM departments", function (err, data) {
+        if (err) throw err;
+        console.log('Presenting: All Departments');
+        console.table(data);
+        start();
+    }); 
 }
 
 // WHEN I choose to add a department

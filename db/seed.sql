@@ -1,7 +1,7 @@
 INSERT INTO departments (name) VALUES
-    ("Forwards"),
-    ("MidFielders"),
-    ("Defenders"),
+    ("Forward"),
+    ("MidFielder"),
+    ("Defender"),
     ("Goalkeeper");
 
 INSERT INTO roles (title, salary, department_id) VALUES
