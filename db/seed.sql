@@ -6,7 +6,7 @@ INSERT INTO departments (name) VALUES
 
 INSERT INTO roles (title, salary, department_id) VALUES
     ("Striker", 100000, 1),
-    ("Centar Forward", 80000, 1),
+    ("Center Forward", 80000, 1),
     ("Left Wing", 150000, 2),
     ("Right Wing", 120000, 2),
     ("Central Midfielder", 160000, 3),
