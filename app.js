@@ -2,17 +2,16 @@
 const mysql = require("mysql2");
 const inquirer = require("inquirer");
 const consoleTable = require("console.table");
+require('dotenv').config();
 
-const PORT = process.env.PORT || 3001;
-
-const db = mysql.createConnection({
-    host: "localhost",
-    user: process.env.DB_USERNAME,
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
 });
 
-db.connect(err => {
+connection.connect(err => {
     if (err) throw err;
     console.log("You are connected to BlueLock!");
     start();
@@ -80,7 +79,7 @@ db.connect(err => {
 // WHEN I choose to view all employees
 // THEN I am presented with a formatted table showing employee data, including employee ids, first names, last names, job titles, departments, salaries, and managers that the employees report to
 const viewEmp = () => {
-    connection.query("SELECT * FROM employee", function (err, data) {
+    connection.query("SELECT * FROM employees", function (err, data) {
         if (err) throw err;
         console.table(data);
         start();
@@ -106,14 +105,14 @@ const addEmp = () => {
             type: "list",
             message: "What is the employee's role?",
             choices: [
-                "Sales Lead",
-                "Salesperson",
-                "Lead Engineer",
-                "Software Engineer",
-                "Account Manager",
-                "Accountant",
-                "Legal Team Lead",
-                "Lawyer"
+                "Striker",
+                "Center Forward",
+                "Left Wing",
+                "Right Wing",
+                "Central Midfielder",
+                "Stopper",
+                "Sweeper",
+                "Goalie",
             ]
         },
         {

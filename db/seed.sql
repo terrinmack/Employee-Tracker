@@ -19,7 +19,7 @@ INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES
     ("Meguru", "Bachira", 2, 1),
     ("Hyoma", "Chigiri", 3, NULL),
     ("Shoei", "Baro", 4, 3),
-    ("Seishiro, Nagi", 5, NULL),
+    ("Seishiro", "Nagi", 5, NULL),
     ("Reo", "Mikage", 6, 5),
     ("Rin", "Itoshi", 7, NULL),
-    ("Rensuke", "Kunigami", 8, 6)
+    ("Rensuke", "Kunigami", 8, 7)
