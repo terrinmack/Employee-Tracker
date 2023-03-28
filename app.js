@@ -163,6 +163,9 @@ const viewAllRoles = () => {
 // WHEN I choose to add a role
 // THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database
 const addRole = () => {
+    connection.query("SELECT * FROM departments", function (err, data) {
+        if (err) throw err;
+    })
     inquirer.prompt([
         {
             name: "roleTitle",
