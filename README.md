@@ -8,7 +8,8 @@ Module 12: Command line application that used mySQL to manage a company's employ
 
 ## Usage 
 * The purpose of this command line application is to use mySQL to create a database for managing a company's employees. 
-* After the user follows the command line prompts using Node.js, 
+* After the user follows the command line prompts using Node.js, they are able to add employees, add roles, add departments, or update a selected employee's role within their department. 
+* This type of app can be useful for growing companies. When an employee moves up in position, they can use this type of program to quickly make changes to their roster
 
 ![Screenshot](./assets/images/command-line-screenshot.jpg)
 
