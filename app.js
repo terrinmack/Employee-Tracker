@@ -33,6 +33,7 @@ connection.connect(err => {
             "View All Roles",
             "Add Role",
             "View All Departments",
+            "Update Employee's Manager",
             "Add Department",
             "Exit",
         ]
@@ -66,6 +67,10 @@ connection.connect(err => {
 
             case "Add Department":
                 addDep();
+                break;
+
+            case "Update Employee's Manager":
+                updateEmpManager();
                 break;
 
             case "Exit":
@@ -234,3 +239,28 @@ const addDep = () => {
         });
     });
 }
+
+// Bonus
+const updateEmpManager = () => {
+
+    inquirer.prompt([
+        {
+        type: "input",
+        name: "employeeID",
+        message: "Which employee would you like to update?(Enter their employee ID)"
+        },
+        {
+            type: "input",
+            name: "newManager",
+            message: "Who will be your selected employee's new manager?(Enter their employee ID)"
+            },
+    ]).then(answer => {
+        connection.query("UPDATE employees SET manager_id= ? WHERE id= ?", [answer.newManager, answer.employeeID], function (err, data){
+            if (err) throw err;
+            console.log("Employee's manager udpated!");
+            console.table(data);
+            start();
+        });
+    });
+}
+
