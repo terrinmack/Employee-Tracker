@@ -119,7 +119,7 @@ const addEmp = () => {
         },
     ]) .then(answer => {
         connection.query(
-            "INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)", [answer.firstName, answer.lastName, answer.employeeRole, answer.emloyeeManager], function (err, data) {
+            "INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)", [answer.firstName, answer.lastName, answer.employeeRole, answer.employeeManager], function (err, data) {
                 if (err) throw err;
                 console.log("Successfully added a new employee!");
                 console.table(data);
@@ -134,17 +134,17 @@ const addEmp = () => {
 const updateEmpRole = () => {
     inquirer.prompt ([
         {
-            name: "employeeName",
+            name: "employeeID",
             type: "input",
             message: "Which employee do you want to update? (Enter their employee id)",
         },
         {
-            name: "employeeRole",
+            name: "roleID",
             type: "input",
             message: "Which role would you like to assign to the selected employee? (Enter the role id)",
         },
     ]).then(answer => {
-        connection.query("UPDATE employees SET role_id=? WHERE id=?", [answer.employeeName, answer.employeeRole], function (err, data) {
+        connection.query("UPDATE employees SET role_id=? WHERE id=?", [answer.employeeID, answer.roleID], function (err, data) {
             if (err) throw err;
             console.log("Employee updated!");
             console.table(data);
