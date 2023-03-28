@@ -144,7 +144,7 @@ const updateEmpRole = () => {
             message: "Which role would you like to assign to the selected employee? (Enter the role id)",
         },
     ]).then(answer => {
-        connection.query("UPDATE employees SET role_id= ? WHERE id= ?", [answer.employeeID, answer.roleID], function (err, data) {
+        connection.query("UPDATE employees SET role_id= ? WHERE id= ?", [answer.roleID, answer.employeeID], function (err, data) {
             if (err) throw err;
             console.log("Employee updated!");
             console.table(data);

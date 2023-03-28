@@ -10,9 +10,12 @@ Module 12: Command line application that used mySQL to manage a company's employ
 * The purpose of this command line application is to use mySQL to create a database for managing a company's employees. 
 * After the user follows the command line prompts using Node.js, 
 
-![Screenshot]()
+![Screenshot](./assets/images/command-line-screenshot.jpg)
 
-*Demonstration [Video of the application]()
+*Demonstration [Video of the application](https://watch.screencastify.com/v/eMAOCQZmIB6VjvnjnHbp)
+
+## Credits
+Thank you to AskBCS for solving my many SQL syntax errors!
 
 ## Contact
 [Terri Mack](https://github.com/terrinmack?tab=repositories)
