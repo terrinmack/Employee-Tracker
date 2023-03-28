@@ -76,8 +76,6 @@ connection.connect(err => {
     });
   };
 
-//   DONE 
-
 // WHEN I choose to view all employees
 // THEN I am presented with a formatted table showing employee data, including employee ids, first names, last names, job titles, departments, salaries, and managers that the employees report to
 const viewEmp = () => {
@@ -105,37 +103,22 @@ const addEmp = () => {
         },
         {
             name: "employeeRole",
-            type: "list",
-            message: "What is the employee's role?",
-            choices: [
-                "Striker",
-                "Center Forward",
-                "Left Wing",
-                "Right Wing",
-                "Central Midfielder",
-                "Stopper",
-                "Sweeper",
-                "Goalie",
-            ]
+            type: "input",
+            message: "What is the employee's role? (Enter the role_id number)",
         },
         {
             name: "employeeManager",
-            type: "list",
-            message: "Who is the employee's manager?",
-            choices: [
-                "Yoichi Isagi",
-                "Meguru Bachira",
-                "Hyoma Chigiri",
-                "Shoei Baro",
-                "Seishiro Nagi",
-                "Reo Mikage",
-                "Rin Itoshi",
-                "Rensuke Kunigami",
-            ]
+            type: "input",
+            message: "Who is the employee's manager? (Enter the manager_id number)",
         },
     ]) .then(answer => {
         connection.query(
-            "INSERT INTO employee (first_name, last_name, role_id, manager_id"
+            "INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)", [answer.firstName, answer.lastName, answer.employeeRole, answer.emloyeeManager], function (err, data) {
+                if (err) throw err;
+                console.log("Successfully added a new employee!");
+                console.table(data);
+                start();
+            }
         )
     })
 }
@@ -143,11 +126,8 @@ const addEmp = () => {
 // WHEN I choose to update an employee role
 // THEN I am prompted to select an employee to update and their new role and this information is updated in the database 
 const updateEmpRole = () => {
-    // shows employees that can be updated
  
 }
-
-// DONE
 
 // WHEN I choose to view all roles
 // THEN I am presented with the job title, role id, the department that role belongs to, and the salary for that role
@@ -163,14 +143,17 @@ const viewAllRoles = () => {
 // WHEN I choose to add a role
 // THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database
 const addRole = () => {
-    connection.query("SELECT * FROM departments", function (err, data) {
-        if (err) throw err;
-    })
+
+    // connection.query("SELECT title, salary, department_id FROM roles", function (err, data) {
+    //     if (err) throw err;
+    //     console.table(data);
+    // })
+
     inquirer.prompt([
         {
             name: "roleTitle",
             type: "input",
-            message: "What is the name of the role?"
+            message: "What is the name of the role? "
         },
         {
             name: "roleSalary",
@@ -184,16 +167,14 @@ const addRole = () => {
         },
         
     ]) .then(answer => {
-        connection.query("INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)" [answer.roleTitle, answer.roleSalary, answer.roleDep], function (err, data) {
+        connection.query("INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)", [answer.roleTitle, answer.roleSalary, answer.roleDep], function (err, data) {
             if (err) throw err;
             console.log('New role successfully added!');
             console.table(data);
             start();
-        })
-    })
+        });
+    });
 }
-
-// DONE
 
 // WHEN I choose to view all departments
 // THEN I am presented with a formatted table showing department names and department ids
@@ -205,8 +186,6 @@ const viewAllDep = () => {
         start();
     }); 
 }
-
-// DONE
 
 // WHEN I choose to add a department
 // THEN I am prompted to enter the name of the department and that department is added to the database
@@ -221,6 +200,6 @@ const addDep = () => {
             console.log("New department added!");
             console.table(data);
             start();
-        })
-    })
+        });
+    });
 }
