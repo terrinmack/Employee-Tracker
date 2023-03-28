@@ -90,6 +90,12 @@ const viewEmp = () => {
 // WHEN I choose to add an employee
 // THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
 const addEmp = () => {
+
+    // connection.query("SELECT first_name, last_name, role_id, department_id FROM employees", function (err, data) {
+    //     if (err) throw err;
+    //     console.table(data);
+    // })
+
     inquirer.prompt([
         {
             name: "firstName",
@@ -126,6 +132,25 @@ const addEmp = () => {
 // WHEN I choose to update an employee role
 // THEN I am prompted to select an employee to update and their new role and this information is updated in the database 
 const updateEmpRole = () => {
+    inquirer.prompt ([
+        {
+            name: "employeeName",
+            type: "input",
+            message: "Which employee do you want to update? (Enter their employee id)",
+        },
+        {
+            name: "employeeRole",
+            type: "input",
+            message: "Which role would you like to assign to the selected employee? (Enter the role id)",
+        },
+    ]).then(answer => {
+        connection.query("UPDATE employees SET role_id=? WHERE id=?", [answer.employeeName, answer.employeeRole], function (err, data) {
+            if (err) throw err;
+            console.log("Employee updated!");
+            console.table(data);
+            start();
+        })
+    })
  
 }
 
@@ -190,6 +215,12 @@ const viewAllDep = () => {
 // WHEN I choose to add a department
 // THEN I am prompted to enter the name of the department and that department is added to the database
 const addDep = () => {
+
+    // connection.query("SELECT name FROM departments", function (err, data) {
+    //     if (err) throw err;
+    //     console.table(data);
+    // })
+
     inquirer.prompt({
         type: "input",
         name: "deptName",
